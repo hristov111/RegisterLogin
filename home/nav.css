@@ -1,0 +1,54 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items:center;
+    justify-content:flex-start;
+    background: linear-gradient(rgb(164, 164, 231), rgb(117, 131, 169), rgb(116, 161, 246));
+    margin: 0;
+    overflow: auto; 
+    min-height: 100vh; 
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(159, 159, 224);
+}
+.nav{
+    display: flex;
+    flex-direction: row;
+}
+
+.nav > * {
+    margin-right: 60px; /* Adds space between items */
+}
+
+.nav > :last-child {
+    margin-right: 0; /* Removes margin from the last item if needed */
+}
+
+a{
+    background-color: rgb(97, 97, 214); /* Blue */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    /* font-size: 16px; */
+    /* margin: 4px 2px; */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+a:hover{
+    background-color: rgb(105, 105, 185); /* Darker blue */
+    transform: scale(1.05); /* Scale up the button */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Increase shadow */
+}
