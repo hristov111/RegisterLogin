@@ -1,5 +1,4 @@
-import {colorErrors,activateCaptcha,refres_captcha, setError, setSuccess, validateEmail, validatePasswords, validatePasswordEquality, makeCaptcha, showCapcha } from '../functions/functions.js';
-
+import {validateFirstLastName, setError, setSuccess, validateEmail, validatePasswords, validatePasswordEquality ,activateCaptcha, refres_captcha, colorErrors, makeCaptcha } from '../functions/functions.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     // Login ReGISTER --------------------------------------------
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const login_password = document.getElementById('login-password');
 
     captcha_refreshbutton.addEventListener('click', e=> {
-        refres_captcha(captcha_text);
+        refres_captcha(captcha_text, makeCaptcha);
     })
     colorErrors(errorText);
 
@@ -84,28 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
         validateInputs();
     })
 
-
-    const validateFirstLastName = (firstNameValue, lastNameValue) => {
-        if(firstNameValue === ''){
-            setError(firstname, "FirstName required"); 
-        }
-        else if(!/^[a-zA-Z]+$/.test(firstNameValue)){
-            setError(firstname, "FirstName should contain only letters");
-        }
-        else {
-            setSuccess(firstname)
-        }
-        if(lastNameValue === ''){
-            setError(lastname, "LastName required"); 
-        }
-        else if(!/^[a-zA-Z]+$/.test(lastNameValue)){
-            setError(lastname, "LastName should contain only letters");
-        }
-        else {
-            setSuccess(lastname)
-            return true;
-        }
-    }
     let captcha_validated = false;
     const validateInputs = () => {
         // REGISTER
@@ -121,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // the valdation_success must be 5
 
             // First Name LastName
-            const firstlastname_validated = validateFirstLastName(firstNameValue, lastNameValue)
+            const firstlastname_validated = validateFirstLastName(firstname,lastname)
             const email_validation =validateEmail(register_emailValue);
             const password_validation= validatePasswords(register_passwordValue);
             const password_validation2= validatePasswords(passwordValue2);
@@ -151,11 +128,14 @@ document.addEventListener("DOMContentLoaded", () => {
             // Check validation of all credentials
             if(password_validation === true && password_validation2 === true && email_validation === true && firstlastname_validated === true)
             {
-                if(validatePasswordEquality(register_passwordValue, passwordValue2)){
+                const password_equality = validatePasswordEquality(register_passwordValue, passwordValue2)
+                if(!password_equality)setError(password2, "Passwords must match!");
+                else setSuccess(password2);
+                if(password_equality){
                     if(captcha_validated){
                         register_form.submit();
                     }
-                    activateCaptcha(registerCaptchaPlaceholder, captcha_element, captcha_container, captcha_text, captcha_userIpnut, captcha_submitButton,onSuccess);
+                    activateCaptcha(registerCaptchaPlaceholder, captcha_container, captcha_text, captcha_userIpnut, captcha_submitButton,onSuccess);
 
                 }
             }   
@@ -176,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if(captcha_validated){
                     login_form.submit();
                 }
-                activateCaptcha(loginCaptchaPlaceholder, captcha_element, captcha_container, captcha_text, captcha_userIpnut, captcha_submitButton, onSuccess)
+                activateCaptcha(loginCaptchaPlaceholder, captcha_container, captcha_text, captcha_userIpnut, captcha_submitButton, onSuccess)
 
             }
         

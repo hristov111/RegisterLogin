@@ -1,4 +1,4 @@
-export const setError = (element, message) => {
+const setError = (element, message) => {
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector('.error');
 
@@ -9,7 +9,7 @@ export const setError = (element, message) => {
 
 
 
-export const setSuccess = (element) => {
+const setSuccess = (element) => {
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector('.error');
 
@@ -18,7 +18,7 @@ export const setSuccess = (element) => {
     inputControl.classList.add("success");
 }
 
-export const validateEmail = (email) => {
+const validateEmail = (email) => {
     if(email === ''){
         return "Email required!";
     }
@@ -30,7 +30,7 @@ export const validateEmail = (email) => {
     }
 }
 
-export const validatePasswords =(pass, for_login=false) => {
+const validatePasswords =(pass, for_login=false) => {
     const badSigns = /[!@#$%^&*(),.?":{}|<>]/g;
     if(pass === ''){
         return "Password required!";
@@ -39,24 +39,22 @@ export const validatePasswords =(pass, for_login=false) => {
         return "Password must contain atleast 8 characters";
     }
     else if(!Array.from(pass).some(char => badSigns.test(char)) && !for_login){
-        return "Password must contain atlease one special charcter";
+        return "Password must contain one special character";
     }
     else {
         return true;
     }
 } 
-export const validatePasswordEquality = (pass1, pass2) => {
+const validatePasswordEquality = (pass1, pass2) => {
     if(pass1 !== pass2){
-        setError(password2, "Passwords must match");
         return false
     }
     else {
-        setSuccess(password2)
         return true;
     }
 }
 
-export const makeCaptcha = () => {
+const makeCaptcha = () => {
     const chars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890"
     let captcha = '';
     for(let i=0;i<6;i++){
@@ -65,38 +63,68 @@ export const makeCaptcha = () => {
     return captcha;
 }
 
-export const showCapcha = (placeholder, captcha_element, captcha_container,captcha_text) => {
+const showCapcha = (placeholder, captcha_container,captcha_text, dependancyCaptcha = makeCaptcha) => {
     captcha_container.style.display = "flex";
     captcha_container.style.flexDirection = "row";
     captcha_container.style.alignItems = "center";
-    placeholder.appendChild(captcha_element);
-    let captcha = makeCaptcha();
+    placeholder.appendChild(captcha_container);
+    let captcha = dependancyCaptcha();
     captcha_text.innerText = captcha;
     return captcha_text.innerText
 }
 
-export const activateCaptcha = (registerCaptchaPlaceholder,captcha_element,captcha_container, captcha_text,captcha_userIpnut,captcha_submitButton, onSuccess) => {
-    showCapcha(registerCaptchaPlaceholder,captcha_element,captcha_container, captcha_text);
+const activateCaptcha = (registerCaptchaPlaceholder
+    ,captcha_container,
+     captcha_text,captcha_userIpnut,captcha_submitButton, onSuccess,
+     dependancyShow=showCapcha,dependancyError=setError,dependancySuccess= setSuccess) => {
+    dependancyShow(registerCaptchaPlaceholder,captcha_container, captcha_text);
     captcha_submitButton.addEventListener('click' ,e=> {
         const user_inputValue = captcha_userIpnut.value.trim();
         if(user_inputValue === ''){
-            setError(captcha_userIpnut, "")
+            dependancyError(captcha_userIpnut, "")
         }else if(user_inputValue === captcha_text.innerText) {
-            setSuccess(captcha_userIpnut);
+            dependancySuccess(captcha_userIpnut);
             onSuccess();
         }
         else {
-            setError(captcha_userIpnut, "");
+            dependancyError(captcha_userIpnut, "");
         }
     })
 }
-
-export const refres_captcha =  captcha_text => {
-    let captcha = makeCaptcha();
-    captcha_text.innerText = captcha;
+const validateFirstLastName = (firstnameEl,lastNameEl) => {
+    const firstNameValue = firstnameEl.value.trim();
+    const lastNameValue = lastNameEl.value.trim(); 
+    let firsNameValidated = false;
+    let lastNameValidated = false;
+    if(firstNameValue === ''){
+        setError(firstnameEl, "FirstName required"); 
+    }
+    else if(!/^[a-zA-Z]+$/.test(firstNameValue)){
+        setError(firstnameEl, "FirstName should contain only letters");
+    }
+    else {
+        setSuccess(firstnameEl)
+        firsNameValidated = true; 
+    }
+    if(lastNameValue === ''){
+        setError(lastNameEl, "LastName required"); 
+    }
+    else if(!/^[a-zA-Z]+$/.test(lastNameValue)){
+        setError(lastNameEl, "LastName should contain only letters");
+    }
+    else {
+        setSuccess(lastNameEl)
+        lastNameValidated = true;
+    }
+    if(lastNameValidated && firsNameValidated) return true
+    else return false
 }
 
-export const colorErrors = (errorText) => {
+const refres_captcha =  (captcha_text, callback) => {
+    captcha_text.innerText = callback();
+}
+
+const colorErrors = (errorText) => {
     errorText.forEach(el=> {
         if(el.textContent.trim()){
             el.parentElement.classList.add('error');
@@ -104,3 +132,11 @@ export const colorErrors = (errorText) => {
         }
     })
 }
+
+export{ 
+    validateFirstLastName,
+    validateEmail,
+    validatePasswordEquality,
+    validatePasswords,
+    setError,
+    setSuccess,colorErrors ,refres_captcha,activateCaptcha,makeCaptcha,showCapcha};
