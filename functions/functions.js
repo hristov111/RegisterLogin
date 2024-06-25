@@ -31,14 +31,14 @@ const validateEmail = (email) => {
 }
 
 const validatePasswords =(pass, for_login=false) => {
-    const badSigns = /[!@#$%^&*(),.?":{}|<>]/g;
+    const goodSigns = /[!@#$%^&*(),.?":{}|<>]/g;
     if(pass === ''){
         return "Password required!";
     }
     else if(pass.length <8){
         return "Password must contain atleast 8 characters";
     }
-    else if(!Array.from(pass).some(char => badSigns.test(char)) && !for_login){
+    else if(!Array.from(pass).some(char => goodSigns.test(char)) && !for_login){
         return "Password must contain one special character";
     }
     else {
@@ -132,8 +132,19 @@ const colorErrors = (errorText) => {
         }
     })
 }
+const colorSuccess = (successText) => {
+    console.log("first");
+    successText.forEach(el => {
+        if(el.textContent.trim()){
+            console.log("here");
+            el.parentElement.classList.add("success");
+            el.parentElement.classList.remove("error");
+        }
+    })
+}
 
 export{ 
+    colorSuccess,
     validateFirstLastName,
     validateEmail,
     validatePasswordEquality,

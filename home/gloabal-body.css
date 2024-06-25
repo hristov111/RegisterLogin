@@ -6,6 +6,6 @@ body {
     justify-content: center;
     background: linear-gradient(rgb(164, 164, 231), rgb(117, 131, 169), rgb(116, 161, 246));
     margin: 0;
-    overflow: auto; /* changed from hidden to auto */
-    min-height: 100vh; /* ensures it covers the full height */
+    overflow: auto; 
+    min-height: 100vh; 
 }

@@ -26,15 +26,15 @@ label{
 .form-container{
     width: 100%;
     max-width: 500px;
-    max-height: 90vh; /* Ensure it doesn't exceed viewport height */
+    max-height: 90vh; 
     padding: 20px;
-    margin: 20px; /* Apply margins */
+    margin: 20px; 
     background-color: whitesmoke;
     border-radius: 4px;
     font-size: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-    overflow-y: auto; /* Enable scrolling within the container */
+    overflow-y: auto; 
 }
 
 .form-container h1{
@@ -84,8 +84,13 @@ label{
 .input-control .error {
     color: #ff3860;
     font-size: 18px;
-    height: 13px;
+    /* height: 13px; */
 }
+ .input-control .success { 
+    /* color: #ff3860;
+    font-size: 18px;
+    height: 13px; */
+} 
 .hidden 
 {
     display: none;

@@ -25,15 +25,15 @@ body {
 }
 
 .nav > * {
-    margin-right: 60px; /* Adds space between items */
+    margin-right: 60px; 
 }
 
 .nav > :last-child {
-    margin-right: 0; /* Removes margin from the last item if needed */
+    margin-right: 0; 
 }
 
 a{
-    background-color: rgb(97, 97, 214); /* Blue */
+    background-color: rgb(97, 97, 214); 
     border: none;
     color: white;
     padding: 10px 20px;
@@ -48,7 +48,7 @@ a{
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 a:hover{
-    background-color: rgb(105, 105, 185); /* Darker blue */
-    transform: scale(1.05); /* Scale up the button */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* Increase shadow */
+    background-color: rgb(105, 105, 185); 
+    transform: scale(1.05); 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3); 
 }

@@ -1,10 +1,10 @@
 .settings-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: row; /* Changed from column to row */
+    align-items: flex-start;
+    flex-direction: row; 
     width: 100%;
-    max-width: 900px; /* Adjusted width to accommodate both forms */
+    max-width: 900px; 
     padding: 20px;
     margin: 20px;
     background-color: whitesmoke;
@@ -16,8 +16,8 @@
 }
 
 .form {
-    margin: 0 10px; /* Adds space between the forms */
-    flex: 1; /* Makes each form take equal width */
+    margin: 0 10px; 
+    flex: 1; 
 }
 
 #email-text {
@@ -40,4 +40,15 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 17px;
+}
+
+.new_cred .error {
+    color: #ff3860;
+    font-size: 18px;
+    height: 13px;
+}
+.new_cred .success {
+    color: #09c372;
+    font-size: 18px;
+    height: 13px;
 }

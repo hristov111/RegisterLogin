@@ -33,7 +33,7 @@ function email_exists() {
 
 function successfully_emailChanges(){
     if(isset($_SESSION["email_changed"])){
-        echo "Email successfully changed!<br> Your new email is {$_SESSION["user_email"]}";
+        echo "Email successfully changed!<br> Your new email is {$_SESSION["user_email"]}.";
         unset($_SESSION["email_changed"]);
     }
 }

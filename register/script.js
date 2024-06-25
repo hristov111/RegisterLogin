@@ -162,12 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         }
 
-        // LOGIN
-        // const login_email = login_email.value.trim();
-        // const login_password = login_password.value.trim();
-
-        
-        
+    
         
     };
 })
