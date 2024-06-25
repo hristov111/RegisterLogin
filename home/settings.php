@@ -38,7 +38,9 @@
             </div>
             <div class="captcha-placeholder" id="email-captcha-placeholder"></div>
             <button type="button" id="email-button">Change email</button>
-            <div class="success"><?php successfully_emailChanges()?></div>
+            <div class="new_cred">
+                <div class="success"><?php successfully_emailChanges()?></div>
+            </div>
         </form>
         <form action="../new-password-handling/password.php" method="POST" class="form" id="password-form">
             <div class="input-control">
@@ -58,8 +60,8 @@
             </div>
             <div class="captcha-placeholder" id="password-captcha-placeholder"></div>
             <button type="button" id="password-button">Change password</button>
-            <div class="input-control">
-                <div class="error"><?php successfully_passwordChanged()?></div>
+            <div class="new_cred">
+                <div class="success"><?php successfully_passwordChanged()?></div>
             </div>
         </form>
     </div>

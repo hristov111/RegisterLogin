@@ -1,6 +1,7 @@
-import { setError, setSuccess, validateEmail, validatePasswords, validatePasswordEquality, makeCaptcha, showCapcha, activateCaptcha, refres_captcha, colorErrors } from '../functions/functions.js';
-
-const validateEmail_button = (current_email,new_email,email_form,captcha_validated,dependancyCaptcha = activateCaptcha) => {
+import { colorSuccess,setError, setSuccess, validateEmail, validatePasswords, validatePasswordEquality, makeCaptcha, showCapcha, activateCaptcha, refres_captcha, colorErrors } from '../functions/functions.js';
+const validateEmail_button = (current_email,new_email,
+    email_form,captcha_validated,
+    emailCaptchaPlaceHolder,captcha_container,captcha_text,captcha_userIpnut,captcha_submitButton,onSuccess,dependancyCaptcha = activateCaptcha) => {
     const current_emailValue = current_email.value.trim();
     const new_emailValue = new_email.value.trim(); 
 
@@ -29,7 +30,8 @@ const validateEmail_button = (current_email,new_email,email_form,captcha_validat
     }
 
 }
-const validatePassword_button = (current_password,new_password,repeated_password,password_form,captcha_validated) => {
+const validatePassword_button = (current_password,new_password,repeated_password
+    ,password_form,captcha_validated,passwordCaptchaPlaceHolder,captcha_container,captcha_text,captcha_userIpnut,captcha_submitButton,onSuccess) => {
     const current_passwordValue = current_password.value.trim(); 
     const new_passwordValue = new_password.value.trim();
     const repeated_passwordValue = repeated_password.value.trim();
@@ -90,6 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const errorText = document.querySelectorAll(".error");
     const successText = document.querySelectorAll(".success");
+    colorErrors(errorText);
+    colorSuccess(successText);
     // Buttons
     const email_button = document.getElementById("email-button");
     const password_button = document.getElementById("password-button");
@@ -116,17 +120,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const onSuccess = ()=>{
         captcha_validated = true;
     }
-    colorErrors(errorText);
 
     let captcha_validated = false;
     email_button.addEventListener('click', e=> {
         e.preventDefault();
-        validateEmail_button(current_email,new_email,email_form,captcha_validated);
+        validateEmail_button(current_email,new_email,email_form,
+            captcha_validated,emailCaptchaPlaceHolder,captcha_container,captcha_text,captcha_userIpnut,captcha_submitButton,onSuccess);
     })
 
     password_button.addEventListener('click', e=> {
         e.preventDefault();
-        validatePassword_button(current_password,new_password,repeated_password,password_form,captcha_validated);
+        validatePassword_button(current_password,new_password,repeated_password,password_form,captcha_validated
+            ,passwordCaptchaPlaceHolder,captcha_container,captcha_text,captcha_userIpnut,captcha_submitButton,onSuccess);
     })
 
 })
