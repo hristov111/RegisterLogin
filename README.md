@@ -1,4 +1,23 @@
 # RegisterLogin Project
+## How to run the app - 
+1. You need to have xaamp installed -https://sourceforge.net/projects/xampp/, start the Apacheand the MySql modules.
+2. PHP,phpmyAdmin and MySql required for the project to run.
+3. Install vs code -https://code.visualstudio.com/
+4. Make a new folder (for example myWebsite)
+5. Open a terminal and cd to the folder you've just created and use -git clone https://github.com/hristov111/RegisterLogin.git
+## If you want to add/modify my jest tests
+5. Create a new package.json file (npm init) and delete mine from the folder
+6. Then install babel - npm install --save-dev @babel/core @babel/cli @babel/preset-env
+7. Then install jest for testing - npm install --save-dev jest babel-jest
+8. Then add this line on the bottom of your package.json
+9. "jest": {
+    "testEnvironment": "jest-environment-jsdom",
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  }
+
+
 Overview
 This project implements simple register and login pages using JavaScript for the frontend and PHP for the backend.A home page ,settings page.
 
