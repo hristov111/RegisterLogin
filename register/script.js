@@ -85,7 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let captcha_validated = false;
     const validateInputs = () => {
-        // REGISTER
         const onSuccess = ()=>{
             captcha_validated = true;
         }
@@ -95,14 +94,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const register_emailValue = register_email.value.trim();
             const register_passwordValue = register_password.value.trim();
             const passwordValue2 = password2.value.trim();
-            // the valdation_success must be 5
 
-            // First Name LastName
             const firstlastname_validated = validateFirstLastName(firstname,lastname)
             const email_validation =validateEmail(register_emailValue);
             const password_validation= validatePasswords(register_passwordValue);
-            const password_validation2= validatePasswords(passwordValue2);
-            // Email
+
             if(typeof email_validation==='string'){
                 setError(register_email,email_validation);
             } 
@@ -110,23 +106,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 setSuccess(register_email);
             } 
 
-            // First password
+
             if(typeof password_validation==='string') {
                 setError(register_password,password_validation);
             }
             else {
                 setSuccess(register_password);
             }
-
-            // Second password
-            if(typeof password_validation2==='string'){
-                setError(password2,password_validation2);
-            } 
-            else {
-                setSuccess(password2);
-            }
-            // Check validation of all credentials
-            if(password_validation === true && password_validation2 === true && email_validation === true && firstlastname_validated === true)
+            if(password_validation === true && email_validation === true && firstlastname_validated === true)
             {
                 const password_equality = validatePasswordEquality(register_passwordValue, passwordValue2)
                 if(!password_equality)setError(password2, "Passwords must match!");

@@ -12,18 +12,15 @@
 
             $errors = [];
 
-            // check if the user gave his email right
             if($user_currentEmail != $current_email_input){
                 $errors["email_wrong"] = "This is not your email!";
             }
 
-            // First check if the current email exists in the database
             if(!email_is_wrong($conn,$current_email_input)){
                 $errors["nosuch_email"] = "Email does not exist!";
             }
 
 
-            // Second check if the second email doesn't exist in the database
             if(!email_is_wrong($conn, $new_email_input)){
                 $errors["email_exists"] = "Email exists. Try a new one!";
 
@@ -50,9 +47,6 @@
             die("Query failed ".$e->getMessage());
         }
        
-
-
-
     }
     else {
         header("Location: ../home/settings.php");

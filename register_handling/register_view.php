@@ -6,8 +6,6 @@ function email_Errors()
 {
     if(isset($_SESSION["errors_signup"])){
         $errors = $_SESSION["errors_signup"];
-        // email_taken
-        // email_invalid
         foreach($errors as $error){
             echo $error ."<br>";
         }

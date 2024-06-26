@@ -2,10 +2,10 @@
 function display_and_clear_error($key) {
     if (isset($_SESSION["errors_login"]) && isset($_SESSION["errors_login"][$key])) {
         echo $_SESSION["errors_login"][$key] . "<br>";
-        unset($_SESSION["errors_login"][$key]); // Unset the specific error after displaying
+        unset($_SESSION["errors_login"][$key]);
     }
 
-    // If all specific errors are cleared, we can unset the whole errors array
+
     if (empty($_SESSION["errors_login"])) {
         unset($_SESSION["errors_login"]);
     }
@@ -43,8 +43,6 @@ function remove_login_hidden() {
                 document.getElementById('register-form').classList.add('hidden');
             });
         </script>";
-        // Optionally clear the session error after handling it if you don't need it anymore
-        // unset($_SESSION["errors_login"]);
     }
 }
 

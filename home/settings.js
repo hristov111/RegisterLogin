@@ -42,7 +42,6 @@ const validatePassword_button = (current_password,new_password,repeated_password
 
     const current_passwordValidation = validatePasswords(current_passwordValue);
     const new_passwordValidation = validatePasswords(new_passwordValue);
-    const repeated_passwordValidation = validatePasswords(repeated_passwordValue);
 
     if(typeof current_passwordValidation === "string") {
         setError(current_password, current_passwordValidation);
@@ -55,18 +54,15 @@ const validatePassword_button = (current_password,new_password,repeated_password
         }
         else {
             setSuccess(new_password);
-            if(typeof repeated_passwordValidation === "string"){
-                setError(repeated_password, repeated_passwordValidation);
-            }else {
-                setSuccess(repeated_password);
-                password_equality =validatePasswordEquality(new_passwordValue, repeated_passwordValue);
-            }
+            password_equality =validatePasswordEquality(new_passwordValue, repeated_passwordValue);
+            if(!password_equality) setError(repeated_password, "Passwords must match!");
+            else setSuccess(repeated_password);
+
             
         }
     }
     if(current_passwordValidation === true 
         && new_passwordValidation === true 
-        && repeated_passwordValidation === true 
         && distinct_passwords 
         && password_equality){
             if(captcha_validated){

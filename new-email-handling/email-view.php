@@ -10,10 +10,9 @@
 function display_and_clear($key) {
     if (isset($_SESSION["errors_email"]) && isset($_SESSION["errors_email"][$key])) {
         echo $_SESSION["errors_email"][$key];
-        unset($_SESSION["errors_email"][$key]); // Unset the specific error after displaying
+        unset($_SESSION["errors_email"][$key]); 
     }
 
-    // If all specific errors are cleared, we can unset the whole errors array
     if (empty($_SESSION["errors_email"])) {
         unset($_SESSION["errors_email"]);
     }

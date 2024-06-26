@@ -5,10 +5,9 @@
 function display_and_clear2($key) {
     if (isset($_SESSION["errors_password"]) && isset($_SESSION["errors_password"][$key])) {
         echo $_SESSION["errors_password"][$key];
-        unset($_SESSION["errors_password"][$key]); // Unset the specific error after displaying
+        unset($_SESSION["errors_password"][$key]); 
     }
 
-    // If all specific errors are cleared, we can unset the whole errors array
     if (empty($_SESSION["errors_password"])) {
         unset($_SESSION["errors_password"]);
     }

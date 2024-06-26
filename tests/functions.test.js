@@ -3,12 +3,12 @@ import {setError, setSuccess, validateEmail, validatePasswords, validatePassword
 
 test("Validates a password", () => {
     expect(validatePasswords('')).toBe("Password required!");
-    expect(validatePasswords('asfasf')).toBe("Password must contain atleast 8 characters")
-    expect(validatePasswords("alohahaa")).toBe("Password must contain one special character");
-    expect(validatePasswords("kalata6767@")).toBe(true);
-    expect(validatePasswords('',true)).toBe("Password required!");
-    expect(validatePasswords('heloa12',true)).toBe("Password must contain atleast 8 characters");
-    expect(validatePasswords('heloa12g',true)).toBe(true);
+    expect(validatePasswords('asfasffas')).toBe("Password must have atleast one uppercase letter!");
+    expect(validatePasswords('Asfasf')).toBe("Password must contain atleast 8 characters")
+    expect(validatePasswords("Alohahaa")).toBe("Password must contain one special character");
+    expect(validatePasswords("Kalata6767@")).toBe(true);
+    expect(validatePasswords('Keloa12',true)).toBe("Password must contain atleast 8 characters");
+    expect(validatePasswords('Heloa12g@',true)).toBe(true);
 })
 
 
@@ -121,7 +121,4 @@ describe("Making captcha/Refreshing captcha", ()=> {
 
         expect(firstCaptcha).not.toBe(secondCaptcha);
     });
-    // tets("Validate if the captcha_text is assigned to the makeCaptcha function", ()=> {
-    //     const m
-    // })
 })

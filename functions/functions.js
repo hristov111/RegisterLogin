@@ -29,16 +29,18 @@ const validateEmail = (email) => {
         return true
     }
 }
-
-const validatePasswords =(pass, for_login=false) => {
+const validatePasswords =(pass) => {
     const goodSigns = /[!@#$%^&*(),.?":{}|<>]/g;
     if(pass === ''){
         return "Password required!";
     }
+    else if(!Array.from(pass).some(x=>x=== x.toUpperCase() && x !== x.toLowerCase())){
+        return "Password must have atleast one uppercase letter!"
+    }
     else if(pass.length <8){
         return "Password must contain atleast 8 characters";
     }
-    else if(!Array.from(pass).some(char => goodSigns.test(char)) && !for_login){
+    else if(!Array.from(pass).some(char => goodSigns.test(char))){
         return "Password must contain one special character";
     }
     else {
@@ -91,33 +93,36 @@ const activateCaptcha = (registerCaptchaPlaceholder
         }
     })
 }
-const validateFirstLastName = (firstnameEl,lastNameEl) => {
-    const firstNameValue = firstnameEl.value.trim();
-    const lastNameValue = lastNameEl.value.trim(); 
+const validateFirstLastName = (firstnameEl,lastNameEl,dependancyError = setError,dependancySuccess = setSuccess) => {
     let firsNameValidated = false;
     let lastNameValidated = false;
-    if(firstNameValue === ''){
-        setError(firstnameEl, "FirstName required"); 
+    if(firstnameEl.value.trim()  === ''){
+        dependancyError(firstnameEl, "FirstName required"); 
     }
-    else if(!/^[a-zA-Z]+$/.test(firstNameValue)){
-        setError(firstnameEl, "FirstName should contain only letters");
+    else if(firstnameEl.value.trim().length > 20){
+        dependancyError(firstnameEl, "Name is too long.")
+    }
+    else if(!/^[a-zA-Z]+$/.test(firstnameEl.value.trim() )){
+        dependancyError(firstnameEl, "FirstName should contain only letters");
     }
     else {
-        setSuccess(firstnameEl)
+        dependancySuccess(firstnameEl)
         firsNameValidated = true; 
     }
-    if(lastNameValue === ''){
-        setError(lastNameEl, "LastName required"); 
+    if(lastNameEl.value.trim() === ''){
+        dependancyError(lastNameEl, "LastName required"); 
     }
-    else if(!/^[a-zA-Z]+$/.test(lastNameValue)){
-        setError(lastNameEl, "LastName should contain only letters");
+    else if(lastNameEl.value.trim().length > 20){
+        dependancyError(lastNameEl, "Name is too long.")
+    }
+    else if(!/^[a-zA-Z]+$/.test(lastNameEl.value.trim())){
+        dependancyError(lastNameEl, "LastName should contain only letters");
     }
     else {
-        setSuccess(lastNameEl)
+        dependancySuccess(lastNameEl)
         lastNameValidated = true;
     }
-    if(lastNameValidated && firsNameValidated) return true
-    else return false
+    return lastNameValidated && firsNameValidated;
 }
 
 const refres_captcha =  (captcha_text, callback) => {

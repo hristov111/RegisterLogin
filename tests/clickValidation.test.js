@@ -32,6 +32,7 @@ describe("Checking the password validation", ()=> {
 
     afterEach(()=> {
         document.body.innerHTML = '';
+        jest.clearAllMocks();
     })
 
     test("Checking if current_password's is bad,would it call setError", ()=> {
@@ -78,29 +79,16 @@ describe("Checking the password validation", ()=> {
         expect(setSuccess).toHaveBeenCalledWith(current_password);
         expect(setError).toHaveBeenCalledWith(new_password,"Please enter a different password");
     })
-    test("Repeated password is not in the correct format", ()=> {
-        current_password.value = "hello123";
-        new_password.value = "alo123";
-        repeated_password.value = "hello12"
-
-        validatePasswords.mockReturnValueOnce(true)
-                        .mockReturnValueOnce(true).mockReturnValueOnce("bad password");
-
-        validatePassword_button(current_password,new_password,repeated_password,form,false);
-        expect(validatePasswords).toHaveBeenCalledWith(repeated_password.value.trim()); 
-        expect(setError).toHaveBeenCalledWith(repeated_password, "bad password");
-    })
-    test("Repated password is in the correct format", ()=> {
-        current_password.value = "hello123";
-        new_password.value = "alo123";
-        repeated_password.value = "hello12"
-
-        validatePasswords.mockReturnValueOnce(true)
-                        .mockReturnValueOnce(true).mockReturnValueOnce(true);
+   
+    test("Checking if the new password is the same as the repeated", ()=> {
+        current_password.value = "Hello13!"
+        new_password.value = "Hello12!";
+        repeated_password.value = "Hello1!"
+        validatePasswords.mockReturnValueOnce(true).mockReturnValueOnce(true);
+        validatePasswordEquality.mockReturnValue(false);
 
         validatePassword_button(current_password,new_password,repeated_password,form,false);
-        expect(validatePasswords).toHaveBeenCalledWith(repeated_password.value.trim()); 
-        expect(setSuccess).toHaveBeenCalledWith(repeated_password);
+        expect(setError).toHaveBeenCalledWith(repeated_password, "Passwords must match!");
     })
 
 })

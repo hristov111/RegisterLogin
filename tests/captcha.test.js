@@ -1,9 +1,8 @@
 jest.mock('../functions/functions', () => {
-    // Require the original module to not be mocked...
     const originalModule = jest.requireActual('../functions/functions');
   
     return { 
-      __esModule: true, // Use it when dealing with esModules
+      __esModule: true, 
       ...originalModule,
       makeCaptcha: jest.fn(),
       setError:jest.fn(),
@@ -125,13 +124,3 @@ describe("Testing if colorErrors will set error/success to the input controls", 
 
 
 })
-
-
-// const colorErrors = (errorText) => {
-//     errorText.forEach(el=> {
-//         if(el.textContent.trim()){
-//             el.parentElement.classList.add('error');
-//             el.parentElement.classList.remove('success');
-//         }
-//     })
-// }
