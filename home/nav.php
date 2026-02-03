@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="../home/gloabal-body.css">
+        <link rel="stylesheet" href="../home/global-body.css">
         <link rel="stylesheet" href="../home/nav.css">
     </head>
     <body>

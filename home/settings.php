@@ -16,7 +16,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../home/gloabal-body.css">
+    <link rel="stylesheet" href="../home/global-body.css">
     <link rel="stylesheet" href="../register/index.css">
     <link rel="stylesheet" href="../home/setting.css">
     <link rel="stylesheet" href="nav.css">

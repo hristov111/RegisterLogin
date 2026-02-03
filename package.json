@@ -1,7 +1,7 @@
 {
-  "name": "firstdemo",
+  "name": "register-login-system",
   "version": "1.0.0",
-  "description": "",
+  "description": "Full-stack user authentication system with registration, login, and account management features",
   "main": "index.js",
   "scripts": {
     "test": "jest"
